@@ -29,6 +29,66 @@ public class Ships {
         return map;
     }
 
+    public void shot(char[][] board) {
+        Board board1 = new Board();
+        Scanner scanner = new Scanner(System.in);
+        int row = 0;
+        int column = 0;
+        StringBuilder stringBuilder;
+        boolean hit = false;
+        boolean wrongCoordinate = true;
+
+
+        while (wrongCoordinate) {
+            stringBuilder = new StringBuilder();
+            String coordinate = scanner.nextLine().toUpperCase();
+            Set<Map.Entry<Character, Integer>> entrySet = MAP.entrySet();
+            for (Map.Entry<Character, Integer> entry : entrySet) {
+                if (coordinate.charAt(0) == entry.getKey()) {
+                    row = entry.getValue();
+                }
+            }
+
+            for (int i = 1; i < coordinate.length(); i++) {
+                stringBuilder.append(coordinate.charAt(i));
+            }
+            column = Integer.parseInt(String.valueOf(stringBuilder)) - 1;
+
+            if (coordinate.charAt(0) != 'A' &&
+                    coordinate.charAt(0) != 'B' &&
+                    coordinate.charAt(0) != 'C' &&
+                    coordinate.charAt(0) != 'D' &&
+                    coordinate.charAt(0) != 'E' &&
+                    coordinate.charAt(0) != 'F' &&
+                    coordinate.charAt(0) != 'G' &&
+                    coordinate.charAt(0) != 'H' &&
+                    coordinate.charAt(0) != 'I' &&
+                    coordinate.charAt(0) != 'J') {
+                System.out.println("\nError! You entered the wrong coordinates! Try again:\n");
+            } else if (column < 0 || column > 9) {
+                System.out.println("\nError! You entered the wrong coordinates! Try again:\n");
+            } else {
+                wrongCoordinate = false;
+            }
+        }
+
+        if (board[row][column] == 'O') {
+            board[row][column] = 'X';
+            hit = true;
+        } else if (board[row][column] == '~') {
+            board[row][column] = 'M';
+        }
+
+        System.out.println();
+        board1.printBoard(board);
+
+        if (hit) {
+            System.out.println("\nYou hit a ship!\n");
+        } else {
+            System.out.println("\nYou missed!\n");
+        }
+    }
+
     public void addAircraftCarrier(char[][] board) {
         Scanner scanner = new Scanner(System.in);
         String coordinateX = "";
@@ -454,9 +514,9 @@ public class Ships {
             // add ship to a board or return error
 
             if (rowX != rowY && columnX != columnY) {
-                System.out.println("Error! Wrong ship location! Try again:");
+                System.out.println("\nError! Wrong ship location! Try again:\n");
             } else if (tooClose) {
-                System.out.println("Error! You placed it too close to another one. Try again:");
+                System.out.println("\nError! You placed it too close to another one. Try again:\n");
             } else if (count == AIRCRAFT_CARRIER_LENGTH) {
                 for (int i = 0; i < board.length; i++) {
                     for (int j = 0; j < board.length; j++) {
@@ -513,7 +573,7 @@ public class Ships {
                 }
                 shipAdded = true;
             } else {
-                System.out.println("Error! Wrong length of the Aircraft Carrier! Try again:");
+                System.out.println("\nError! Wrong length of the Aircraft Carrier! Try again:\n");
             }
         }
     }
@@ -944,9 +1004,9 @@ public class Ships {
             // add ship to a board or return error
 
             if (rowX != rowY && columnX != columnY) {
-                System.out.println("Error! Wrong ship location! Try again:");
+                System.out.println("\nError! Wrong ship location! Try again:\n");
             } else if (tooClose) {
-                System.out.println("Error! You placed it too close to another one. Try again:");
+                System.out.println("\nError! You placed it too close to another one. Try again:\n");
             } else if (count == BATTLESHIP_LENGTH) {
                 for (int i = 0; i < board.length; i++) {
                     for (int j = 0; j < board.length; j++) {
@@ -1003,7 +1063,7 @@ public class Ships {
                 }
                 shipAdded = true;
             } else {
-                System.out.println("Error! Wrong length of the Battleship! Try again:");
+                System.out.println("\nError! Wrong length of the Battleship! Try again:\n");
             }
         }
     }
@@ -1434,9 +1494,9 @@ public class Ships {
             // add ship to a board or return error
 
             if (rowX != rowY && columnX != columnY) {
-                System.out.println("Error! Wrong ship location! Try again:");
+                System.out.println("\nError! Wrong ship location! Try again:\n");
             } else if (tooClose) {
-                System.out.println("Error! You placed it too close to another one. Try again:");
+                System.out.println("\nError! You placed it too close to another one. Try again:\n");
             } else if (count == SUBMARINE_LENGTH) {
                 for (int i = 0; i < board.length; i++) {
                     for (int j = 0; j < board.length; j++) {
@@ -1493,7 +1553,7 @@ public class Ships {
                 }
                 shipAdded = true;
             } else {
-                System.out.println("Error! Wrong length of the Submarine! Try again:");
+                System.out.println("\nError! Wrong length of the Submarine! Try again:\n");
             }
         }
     }
@@ -1924,9 +1984,9 @@ public class Ships {
             // add ship to a board or return error
 
             if (rowX != rowY && columnX != columnY) {
-                System.out.println("Error! Wrong ship location! Try again:");
+                System.out.println("\nError! Wrong ship location! Try again:\n");
             } else if (tooClose) {
-                System.out.println("Error! You placed it too close to another one. Try again:");
+                System.out.println("\nError! You placed it too close to another one. Try again:\n");
             } else if (count == CRUISER_LENGTH) {
                 for (int i = 0; i < board.length; i++) {
                     for (int j = 0; j < board.length; j++) {
@@ -1983,7 +2043,7 @@ public class Ships {
                 }
                 shipAdded = true;
             } else {
-                System.out.println("Error! Wrong length of the Cruiser! Try again:");
+                System.out.println("\nError! Wrong length of the Cruiser! Try again:\n");
             }
         }
     }
@@ -2414,9 +2474,9 @@ public class Ships {
             // add ship to a board or return error
 
             if (rowX != rowY && columnX != columnY) {
-                System.out.println("Error! Wrong ship location! Try again:");
+                System.out.println("\nError! Wrong ship location! Try again:\n");
             } else if (tooClose) {
-                System.out.println("Error! You placed it too close to another one. Try again:");
+                System.out.println("\nError! You placed it too close to another one. Try again:\n");
             } else if (count == DESTROYER_LENGTH) {
                 for (int i = 0; i < board.length; i++) {
                     for (int j = 0; j < board.length; j++) {
@@ -2473,7 +2533,7 @@ public class Ships {
                 }
                 shipAdded = true;
             } else {
-                System.out.println("Error! Wrong length of the Destroyer! Try again:");
+                System.out.println("\nError! Wrong length of the Destroyer! Try again:\n");
             }
         }
     }

@@ -28,5 +28,10 @@ public class Main {
         System.out.println("\nEnter the coordinates of the Destroyer (2 cells):\n");
         ships.addDestroyer(temp);
         board.printBoard(temp);
+
+        System.out.println("\nThe game starts!\n");
+        board.printBoard(temp);
+        System.out.println("\nTake a shot!\n");
+        ships.shot(temp);
     }
 }
