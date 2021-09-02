@@ -29,8 +29,8 @@ public class Ships {
         return map;
     }
 
-    public void shot(char[][] board) {
-        Board board1 = new Board();
+    public void shot(char[][] realBoard, char[][] fogOfWar) {
+        Board board = new Board();
         Scanner scanner = new Scanner(System.in);
         int row = 0;
         int column = 0;
@@ -72,21 +72,24 @@ public class Ships {
             }
         }
 
-        if (board[row][column] == 'O') {
-            board[row][column] = 'X';
+        if (realBoard[row][column] == 'O') {
+            realBoard[row][column] = 'X';
+            fogOfWar[row][column] = 'X';
             hit = true;
-        } else if (board[row][column] == '~') {
-            board[row][column] = 'M';
+        } else if (realBoard[row][column] == '~') {
+            realBoard[row][column] = 'M';
+            fogOfWar[row][column] = 'M';
         }
 
         System.out.println();
-        board1.printBoard(board);
+        board.printBoard(fogOfWar);
 
         if (hit) {
             System.out.println("\nYou hit a ship!\n");
         } else {
             System.out.println("\nYou missed!\n");
         }
+        board.printBoard(realBoard);
     }
 
     public void addAircraftCarrier(char[][] board) {

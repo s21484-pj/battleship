@@ -4,8 +4,10 @@ public class Main {
 
     public static void main(String[] args) {
         Board board = new Board();
+        Board board1 = new Board();
         Ships ships = new Ships();
         char[][] temp = board.getBoard();
+        char[][] fogOfWar = board1.getBoard();
 
         board.printBoard(temp);
 
@@ -30,8 +32,8 @@ public class Main {
         board.printBoard(temp);
 
         System.out.println("\nThe game starts!\n");
-        board.printBoard(temp);
+        board.printBoard(fogOfWar);
         System.out.println("\nTake a shot!\n");
-        ships.shot(temp);
+        ships.shot(temp, fogOfWar);
     }
 }
