@@ -12,10 +12,6 @@ public class Board {
         return board;
     }
 
-    public void setBoard(char[][] board) {
-        this.board = board;
-    }
-
     private char[][] initEmptyBoard() {
         char[][] board = new char[10][10];
         for (int i = 0; i < board.length; i++) {

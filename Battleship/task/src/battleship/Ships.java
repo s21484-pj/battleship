@@ -5,11 +5,6 @@ import java.util.*;
 public class Ships {
 
     private final HashMap<Character, Integer> MAP = initMap();
-    private final int AIRCRAFT_CARRIER_LENGTH = 5;
-    private final int BATTLESHIP_LENGTH = 4;
-    private final int SUBMARINE_LENGTH = 3;
-    private final int CRUISER_LENGTH = 3;
-    private final int DESTROYER_LENGTH = 2;
     private ArrayList<String> aircraftCarrierCoordinates;
     private ArrayList<String> battleshipCoordinates;
     private ArrayList<String> submarineCoordinates;
@@ -42,7 +37,6 @@ public class Ships {
     }
 
     public void shot(char[][] realBoard, char[][] fogOfWar) {
-        Board board = new Board();
         Scanner scanner = new Scanner(System.in);
         int row = 0;
         int column = 0;
@@ -107,9 +101,6 @@ public class Ships {
                 destroyerCoordinates.remove(coordinates);
             }
         }
-
-//        System.out.println();
-//        board.printBoard(fogOfWar);
 
         if (aircraftCarrierCoordinates.isEmpty()
                 && battleshipCoordinates.isEmpty()
@@ -199,7 +190,7 @@ public class Ships {
             columnY = Integer.parseInt(String.valueOf(stringBuilder)) - 1;
 
             // check length of ship is correct
-            // and there is no another ship too close
+            // and there is not another ship too close
 
             for (int i = 0; i < board.length; i++) {
                 for (int j = 0; j < board.length; j++) {
@@ -565,6 +556,7 @@ public class Ships {
 
             // add ship to a board or return error
 
+            int AIRCRAFT_CARRIER_LENGTH = 5;
             if (rowX != rowY && columnX != columnY) {
                 System.out.println("\nError! Wrong ship location! Try again:\n");
             } else if (tooClose) {
@@ -694,7 +686,7 @@ public class Ships {
             columnY = Integer.parseInt(String.valueOf(stringBuilder)) - 1;
 
             // check length of ship is correct
-            // and there is no another ship too close
+            // and there is not another ship too close
 
             for (int i = 0; i < board.length; i++) {
                 for (int j = 0; j < board.length; j++) {
@@ -1060,6 +1052,7 @@ public class Ships {
 
             // add ship to a board or return error
 
+            int BATTLESHIP_LENGTH = 4;
             if (rowX != rowY && columnX != columnY) {
                 System.out.println("\nError! Wrong ship location! Try again:\n");
             } else if (tooClose) {
@@ -1189,7 +1182,7 @@ public class Ships {
             columnY = Integer.parseInt(String.valueOf(stringBuilder)) - 1;
 
             // check length of ship is correct
-            // and there is no another ship too close
+            // and there is not another ship too close
 
             for (int i = 0; i < board.length; i++) {
                 for (int j = 0; j < board.length; j++) {
@@ -1555,6 +1548,7 @@ public class Ships {
 
             // add ship to a board or return error
 
+            int SUBMARINE_LENGTH = 3;
             if (rowX != rowY && columnX != columnY) {
                 System.out.println("\nError! Wrong ship location! Try again:\n");
             } else if (tooClose) {
@@ -1684,7 +1678,7 @@ public class Ships {
             columnY = Integer.parseInt(String.valueOf(stringBuilder)) - 1;
 
             // check length of ship is correct
-            // and there is no another ship too close
+            // and there is not another ship too close
 
             for (int i = 0; i < board.length; i++) {
                 for (int j = 0; j < board.length; j++) {
@@ -2050,6 +2044,7 @@ public class Ships {
 
             // add ship to a board or return error
 
+            int CRUISER_LENGTH = 3;
             if (rowX != rowY && columnX != columnY) {
                 System.out.println("\nError! Wrong ship location! Try again:\n");
             } else if (tooClose) {
@@ -2179,7 +2174,7 @@ public class Ships {
             columnY = Integer.parseInt(String.valueOf(stringBuilder)) - 1;
 
             // check length of ship is correct
-            // and there is no another ship too close
+            // and there is not another ship too close
 
             for (int i = 0; i < board.length; i++) {
                 for (int j = 0; j < board.length; j++) {
@@ -2545,6 +2540,7 @@ public class Ships {
 
             // add ship to a board or return error
 
+            int DESTROYER_LENGTH = 2;
             if (rowX != rowY && columnX != columnY) {
                 System.out.println("\nError! Wrong ship location! Try again:\n");
             } else if (tooClose) {
