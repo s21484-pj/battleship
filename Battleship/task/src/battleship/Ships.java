@@ -108,8 +108,8 @@ public class Ships {
             }
         }
 
-        System.out.println();
-        board.printBoard(fogOfWar);
+//        System.out.println();
+//        board.printBoard(fogOfWar);
 
         if (aircraftCarrierCoordinates.isEmpty()
                 && battleshipCoordinates.isEmpty()
