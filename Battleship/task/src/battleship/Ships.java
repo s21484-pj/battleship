@@ -1,9 +1,6 @@
 package battleship;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 public class Ships {
 
@@ -13,6 +10,21 @@ public class Ships {
     private final int SUBMARINE_LENGTH = 3;
     private final int CRUISER_LENGTH = 3;
     private final int DESTROYER_LENGTH = 2;
+    private ArrayList<String> aircraftCarrierCoordinates;
+    private ArrayList<String> battleshipCoordinates;
+    private ArrayList<String> submarineCoordinates;
+    private ArrayList<String> cruiserCoordinates;
+    private ArrayList<String> destroyerCoordinates;
+    private boolean aircraftCarrierSunk = false;
+    private boolean battleshipSunk = false;
+    private boolean submarineSunk = false;
+    private boolean cruiserSunk = false;
+    private boolean destroyerSunk = false;
+    private boolean isGameFinished = false;
+
+    public boolean isGameFinished() {
+        return isGameFinished;
+    }
 
     private HashMap<Character, Integer> initMap() {
         HashMap<Character, Integer> map = new HashMap<>();
@@ -81,19 +93,56 @@ public class Ships {
             fogOfWar[row][column] = 'M';
         }
 
+        String coordinates = String.valueOf(row) + column;
+        if (hit) {
+            if (aircraftCarrierCoordinates.contains(coordinates)) {
+                aircraftCarrierCoordinates.remove(coordinates);
+            } else if (battleshipCoordinates.contains(coordinates)) {
+                battleshipCoordinates.remove(coordinates);
+            } else if (submarineCoordinates.contains(coordinates)) {
+                submarineCoordinates.remove(coordinates);
+            } else if (cruiserCoordinates.contains(coordinates)) {
+                cruiserCoordinates.remove(coordinates);
+            } else if (destroyerCoordinates.contains(coordinates)) {
+                destroyerCoordinates.remove(coordinates);
+            }
+        }
+
         System.out.println();
         board.printBoard(fogOfWar);
 
-        if (hit) {
+        if (aircraftCarrierCoordinates.isEmpty()
+                && battleshipCoordinates.isEmpty()
+                && submarineCoordinates.isEmpty()
+                && cruiserCoordinates.isEmpty()
+                && destroyerCoordinates.isEmpty()) {
+            System.out.println("\nYou sank the last ship. You won. Congratulations!\n");
+            isGameFinished = true;
+        } else if (aircraftCarrierCoordinates.isEmpty() && !aircraftCarrierSunk) {
+            aircraftCarrierSunk = true;
+            System.out.println("\nYou sank a ship! Specify a new target:\n");
+        } else if (battleshipCoordinates.isEmpty() && !battleshipSunk) {
+            battleshipSunk = true;
+            System.out.println("\nYou sank a ship! Specify a new target:\n");
+        } else if (submarineCoordinates.isEmpty() && !submarineSunk) {
+            submarineSunk = true;
+            System.out.println("\nYou sank a ship! Specify a new target:\n");
+        } else if (cruiserCoordinates.isEmpty() && !cruiserSunk) {
+            cruiserSunk = true;
+            System.out.println("\nYou sank a ship! Specify a new target:\n");
+        } else if (destroyerCoordinates.isEmpty() && !destroyerSunk) {
+            destroyerSunk = true;
+            System.out.println("\nYou sank a ship! Specify a new target:\n");
+        } else if (hit) {
             System.out.println("\nYou hit a ship!\n");
         } else {
             System.out.println("\nYou missed!\n");
         }
-        board.printBoard(realBoard);
     }
 
     public void addAircraftCarrier(char[][] board) {
         Scanner scanner = new Scanner(System.in);
+        aircraftCarrierCoordinates = new ArrayList<>();
         String coordinateX = "";
         String coordinateY;
         int rowX = 0;
@@ -529,6 +578,7 @@ public class Ships {
                                     if (columnX == j) {
                                         while (true) {
                                             board[i][j] = 'O';
+                                            aircraftCarrierCoordinates.add(String.valueOf(i) + j);
                                             j++;
                                             if (j > columnY) {
                                                 break;
@@ -539,6 +589,7 @@ public class Ships {
                                     if (columnY == j) {
                                         while (true) {
                                             board[i][j] = 'O';
+                                            aircraftCarrierCoordinates.add(String.valueOf(i) + j);
                                             j++;
                                             if (j > columnX) {
                                                 break;
@@ -553,6 +604,7 @@ public class Ships {
                                     if (rowX == i) {
                                         while (true) {
                                             board[i][j] = 'O';
+                                            aircraftCarrierCoordinates.add(String.valueOf(i) + j);
                                             i++;
                                             if (i > rowY) {
                                                 break;
@@ -563,6 +615,7 @@ public class Ships {
                                     if (rowY == i) {
                                         while (true) {
                                             board[i][j] = 'O';
+                                            aircraftCarrierCoordinates.add(String.valueOf(i) + j);
                                             i++;
                                             if (i > rowX) {
                                                 break;
@@ -583,6 +636,7 @@ public class Ships {
 
     public void addBattleship(char[][] board) {
         Scanner scanner = new Scanner(System.in);
+        battleshipCoordinates = new ArrayList<>();
         String coordinateX = "";
         String coordinateY;
         int rowX = 0;
@@ -1019,6 +1073,7 @@ public class Ships {
                                     if (columnX == j) {
                                         while (true) {
                                             board[i][j] = 'O';
+                                            battleshipCoordinates.add(String.valueOf(i) + j);
                                             j++;
                                             if (j > columnY) {
                                                 break;
@@ -1029,6 +1084,7 @@ public class Ships {
                                     if (columnY == j) {
                                         while (true) {
                                             board[i][j] = 'O';
+                                            battleshipCoordinates.add(String.valueOf(i) + j);
                                             j++;
                                             if (j > columnX) {
                                                 break;
@@ -1043,6 +1099,7 @@ public class Ships {
                                     if (rowX == i) {
                                         while (true) {
                                             board[i][j] = 'O';
+                                            battleshipCoordinates.add(String.valueOf(i) + j);
                                             i++;
                                             if (i > rowY) {
                                                 break;
@@ -1053,6 +1110,7 @@ public class Ships {
                                     if (rowY == i) {
                                         while (true) {
                                             board[i][j] = 'O';
+                                            battleshipCoordinates.add(String.valueOf(i) + j);
                                             i++;
                                             if (i > rowX) {
                                                 break;
@@ -1073,6 +1131,7 @@ public class Ships {
 
     public void addSubmarine(char[][] board) {
         Scanner scanner = new Scanner(System.in);
+        submarineCoordinates = new ArrayList<>();
         String coordinateX = "";
         String coordinateY;
         int rowX = 0;
@@ -1509,6 +1568,7 @@ public class Ships {
                                     if (columnX == j) {
                                         while (true) {
                                             board[i][j] = 'O';
+                                            submarineCoordinates.add(String.valueOf(i) + j);
                                             j++;
                                             if (j > columnY) {
                                                 break;
@@ -1519,6 +1579,7 @@ public class Ships {
                                     if (columnY == j) {
                                         while (true) {
                                             board[i][j] = 'O';
+                                            submarineCoordinates.add(String.valueOf(i) + j);
                                             j++;
                                             if (j > columnX) {
                                                 break;
@@ -1533,6 +1594,7 @@ public class Ships {
                                     if (rowX == i) {
                                         while (true) {
                                             board[i][j] = 'O';
+                                            submarineCoordinates.add(String.valueOf(i) + j);
                                             i++;
                                             if (i > rowY) {
                                                 break;
@@ -1543,6 +1605,7 @@ public class Ships {
                                     if (rowY == i) {
                                         while (true) {
                                             board[i][j] = 'O';
+                                            submarineCoordinates.add(String.valueOf(i) + j);
                                             i++;
                                             if (i > rowX) {
                                                 break;
@@ -1563,6 +1626,7 @@ public class Ships {
 
     public void addCruiser(char[][] board) {
         Scanner scanner = new Scanner(System.in);
+        cruiserCoordinates = new ArrayList<>();
         String coordinateX = "";
         String coordinateY;
         int rowX = 0;
@@ -1999,6 +2063,7 @@ public class Ships {
                                     if (columnX == j) {
                                         while (true) {
                                             board[i][j] = 'O';
+                                            cruiserCoordinates.add(String.valueOf(i) + j);
                                             j++;
                                             if (j > columnY) {
                                                 break;
@@ -2009,6 +2074,7 @@ public class Ships {
                                     if (columnY == j) {
                                         while (true) {
                                             board[i][j] = 'O';
+                                            cruiserCoordinates.add(String.valueOf(i) + j);
                                             j++;
                                             if (j > columnX) {
                                                 break;
@@ -2023,6 +2089,7 @@ public class Ships {
                                     if (rowX == i) {
                                         while (true) {
                                             board[i][j] = 'O';
+                                            cruiserCoordinates.add(String.valueOf(i) + j);
                                             i++;
                                             if (i > rowY) {
                                                 break;
@@ -2033,6 +2100,7 @@ public class Ships {
                                     if (rowY == i) {
                                         while (true) {
                                             board[i][j] = 'O';
+                                            cruiserCoordinates.add(String.valueOf(i) + j);
                                             i++;
                                             if (i > rowX) {
                                                 break;
@@ -2053,6 +2121,7 @@ public class Ships {
 
     public void addDestroyer(char[][] board) {
         Scanner scanner = new Scanner(System.in);
+        destroyerCoordinates = new ArrayList<>();
         String coordinateX = "";
         String coordinateY;
         int rowX = 0;
@@ -2489,6 +2558,7 @@ public class Ships {
                                     if (columnX == j) {
                                         while (true) {
                                             board[i][j] = 'O';
+                                            destroyerCoordinates.add(String.valueOf(i) + j);
                                             j++;
                                             if (j > columnY) {
                                                 break;
@@ -2499,6 +2569,7 @@ public class Ships {
                                     if (columnY == j) {
                                         while (true) {
                                             board[i][j] = 'O';
+                                            destroyerCoordinates.add(String.valueOf(i) + j);
                                             j++;
                                             if (j > columnX) {
                                                 break;
@@ -2513,6 +2584,7 @@ public class Ships {
                                     if (rowX == i) {
                                         while (true) {
                                             board[i][j] = 'O';
+                                            destroyerCoordinates.add(String.valueOf(i) + j);
                                             i++;
                                             if (i > rowY) {
                                                 break;
@@ -2523,6 +2595,7 @@ public class Ships {
                                     if (rowY == i) {
                                         while (true) {
                                             board[i][j] = 'O';
+                                            destroyerCoordinates.add(String.valueOf(i) + j);
                                             i++;
                                             if (i > rowX) {
                                                 break;

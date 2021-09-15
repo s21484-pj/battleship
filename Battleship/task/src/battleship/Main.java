@@ -8,6 +8,7 @@ public class Main {
         Ships ships = new Ships();
         char[][] temp = board.getBoard();
         char[][] fogOfWar = board1.getBoard();
+        boolean isGameFinished = false;
 
         board.printBoard(temp);
 
@@ -34,6 +35,11 @@ public class Main {
         System.out.println("\nThe game starts!\n");
         board.printBoard(fogOfWar);
         System.out.println("\nTake a shot!\n");
-        ships.shot(temp, fogOfWar);
+
+        while (!isGameFinished) {
+            ships.shot(temp, fogOfWar);
+            isGameFinished = ships.isGameFinished();
+        }
+
     }
 }
